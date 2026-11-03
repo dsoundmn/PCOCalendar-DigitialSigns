@@ -30,6 +30,14 @@ The Planning Center Calendar has tags for Types that must be added to every even
      ```bash
      venv\Scripts\activate
      ```
+
+     If you have issues with transparent (enterprise) proxies / filtering you may need to include the system certificates
+
+     ```bash
+     pip install pip-system-certs
+     pip config set global.cert_pool system
+     ```
+     
    - On macOS/Linux:
      ```bash
      source venv/bin/activate
