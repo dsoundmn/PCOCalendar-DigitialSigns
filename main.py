@@ -77,14 +77,17 @@ def draw_event(background_image, title, start_datetime, end_datetime, descriptio
     title = title.upper()
     same_day = (start_datetime.date() == end_datetime.date())
     month_display = start_datetime.strftime('%b').upper()
-    day_display = start_datetime.strftime('%-d')
+    day_display_format = '%#d' if os.name == 'nt' else '%-d'
+    day_display = start_datetime.strftime(day_display_format)
     day_of_week_display = start_datetime.strftime('%A').upper()
 
     clean = re.compile('<.*?>|\n|\r\n')
     description_display = re.sub(clean, '', description).lstrip().rstrip().upper()
+    
+    time_display_format = '%#I:%M %p' if os.name == 'nt' else '%-I:%M %p'
 
-    time_display_start = f"{start_datetime.strftime('%-I:%M %p')} -"
-    time_display_end = f"{end_datetime.strftime('%-I:%M %p')}"
+    time_display_start = f"{start_datetime.strftime(time_display_format)} -"
+    time_display_end = f"{end_datetime.strftime(time_display_format)}"
     if not same_day:
         time_display_end_date = f"{end_datetime.strftime('%b %d')}"
     else:
